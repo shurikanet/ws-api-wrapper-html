@@ -1,7 +1,54 @@
 body {
   padding-top: 54px;
-  background: #eee; }
+  background: #eee;
+  font-family: 'Open Sans', sans-serif; }
 
 @media (min-width: 992px) {
   body {
     padding-top: 56px; } }
+
+.option-item {
+  box-sizing: border-box;
+  background-color: #d70000;
+  border-radius: 2px;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 14px;
+  margin-top: 0;
+  padding: 20px 20px 20px 20px;
+  border: 0 none;
+  box-shadow: none;
+  transition: all 0.3s ease-out;
+  width: 80%;
+  display: block;
+  margin-bottom: 15px;
+  min-width: 330px; }
+
+.option-item:hover {
+  background-color: #000;
+  color: #FFFFFF;
+  text-decoration: none; }
+
+.option-item .option-dia {
+  font-size: 30px; }
+
+.option-item .option-divider {
+  border-left: 2px dotted #fff;
+  width: 5px;
+  display: inline;
+  height: 18px;
+  margin: 0 10px; }
+
+.option-item .option-wheel-params {
+  display: inline-block; }
+
+.option-item .option-wheel-params div:first-child {
+  margin: 0 0 10px; }
+
+.option-item .option-axis {
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: relative;
+  top: -10px; }
