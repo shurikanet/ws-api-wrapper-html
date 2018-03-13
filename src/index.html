@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wheel Size API HTML Demo</title>
+    <link rel="stylesheet" href="3rd-party/css/font-awesome.min.css">
+    <link rel="stylesheet" href="3rd-party/css/bootstrap.css">
+    <link rel="stylesheet" href="3rd-party/css/select2.min.css">
+
+    <link rel="stylesheet" href="3rd-party/css/select2-bootstrap4.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="https://www.wheel-size.com/">Wheel-Size.com</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://developer.wheel-size.com/">API Portal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://developer.wheel-size.com/signup?plan_ids[]=2357355811171">Get API
+                        Key</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="mailto:info@wheel-size.com">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 ">
+            <h1 class="mt-5 text-center">Wheel Size API Demo (#programming language)</h1>
+            <p class="lead text-center">SEARCH FOR TIRES BY VEHICLE</p>
+
+            <div class="text-left">
+                <div class="form-row">
+                    <div class="form-group col-md-3 col-sm-3">
+                        <label for="selectMake">Make</label>
+                        <select id="selectMake" name="make" class="form-control js-select2 js-select2-makes">
+                            <option value="">Make</option>
+
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-1 col-sm-3">
+                        <label for="selectYear">Year</label>
+                        <select id="selectYear" class="form-control js-select2 js-select2-years" disabled>
+                            <option value="">Year</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2 col-sm-3">
+                        <label for="selectModel">Model</label>
+                        <select id="selectModel" class="form-control js-select2 js-select2-models" disabled>
+                            <option value="">Model</option>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-2 col-sm-3">
+                        <label for="selectTrim">Model</label>
+                        <select id="selectTrim" class="form-control js-select2 js-select2-trims" disabled>
+                            <option value="">Trims</option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <h6 class="mt-5 mb-4 text-center">Your vehicle: Chevrolet Cruze Hatchback I 1.7 TD (81kW) (5/115)</h6>
+
+            <div class="data-block">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul>
+                            <li>Generation: II [2016 .. 2019] [USDM]</li>
+                            <li>Market: USDM</li>
+                            <li>Power: 153 hp | 114.1 kW | 155 PS</li>
+                            <li>Engine: I4, Petrol</li>
+                            <li>Center Bore: 56.6 mm</li>
+                            <li>Wheel Fasteners: Lug nuts</li>
+                            <li>Thread Size: M12 x 1.5</li>
+                            <li>Trim Production: [2016 .. 2017]</li>
+                            <li>PCD: 5x105 / 5x4.13</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">13131313Oeweriginal equipment sizes (OE) and Optional Sizes</h4>
+                            <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                            <hr>
+                            <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info" role="alert">
+                <strong>Heads up!</strong>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="3rd-party/js/jquery.min.js"></script>
+<script src="3rd-party/js/popper.min.js"></script>
+<script src="3rd-party/js/bootstrap.min.js"></script>
+<script src="3rd-party/js/select2.min.js"></script>
+<script src="js/custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+
+$bg-color:  #eee;
+body {
+  padding-top: 54px;
+  background: $bg-color;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 56px; }
+}
