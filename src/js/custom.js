@@ -10,6 +10,10 @@ $('.js-select2-makes').select2({
 });
 */
 
+
+var currentPageIsSearch = checkParameterExists("search") ? true : false;
+console.log(currentPageIsSearch);
+
 //add your API here
 var apiKey = "c88589c43ff3291fa3010a00a73ae133";
 
@@ -22,7 +26,7 @@ var trimsSelect = $('.js-select2-trims');
 //it is better to cache the results of this method
 $.ajax({
     type: 'GET',
-    url: '/api/ws-makes.http',
+    url: '/api/ws-makes.http',  //cache!!!
     //url: 'https://api.wheel-size.com/v1/makes/?user_key='+apiKey,
     dataType: "json"
 }).then(function (data) {
@@ -38,7 +42,12 @@ $.ajax({
         data: dataObj,
         placeholder: 'Make',
         theme: 'bootstrap4'
-    })
+    });
+
+    if(currentPageIsSearch) {
+        var currentMake = getQueryParam("make");
+        makesSelect.val(currentMake).trigger("change.select2");
+    }
 });
 
 
@@ -47,7 +56,6 @@ $.ajax({
 
 
 makesSelect.on('change', function (e) {
-    //var optionSelected = $(this).find("option:selected").text();
     var makeSelected = this.value;
     console.log(makeSelected);
     yearsSelect.html("").prop("disabled", true);
@@ -72,11 +80,16 @@ makesSelect.on('change', function (e) {
                 obj.text = obj.text || obj.name;
                 return obj;
             });
-            yearsSelect.select2({
+            yearsSelect.prepend('<option selected>Year</option>').select2({
                 data: dataObj,
-                placeholder: 'Years',
+                placeholder: {
+                    id: "0",
+                    text: "Select an Title" //Should be text not placeholder
+                }
+                ,
+                allowClear: true,
                 theme: 'bootstrap4'
-            })
+            });
         });
     }
 
@@ -115,11 +128,11 @@ yearsSelect.on('change', function (e) {
                 return obj;
             });
 
-            modelsSelect.select2({
+            modelsSelect.prepend('<option selected>Models</option>').select2({
                 data: dataObj,
                 placeholder: 'Models',
                 theme: 'bootstrap4'
-            })
+            });
         });
     }
 
@@ -154,11 +167,11 @@ modelsSelect.on('change', function (e) {
                 return obj;
             });
 
-            trimsSelect.select2({
+            trimsSelect.prepend('<option selected>Trims</option>').select2({
                 data: dataObj,
                 placeholder: 'Trims',
                 theme: 'bootstrap4'
-            })
+            });
 
 
         });
@@ -171,9 +184,38 @@ trimsSelect.on('change', function (e) {
     $(".data-block").removeClass("invisible");
 
     //or create a query with GET param
-   window.location.href = "/search=Y&?make="+makesSelect.find("option:selected").val()+"&model="+modelsSelect.find("option:selected").val()+"&year="+yearsSelect.find("option:selected").val()+"&trim="+makesSelect.find("option:selected").val();
+   window.location.href = "?search=Y&make="+makesSelect.find("option:selected").val()+"&model="+encodeURI(modelsSelect.find("option:selected").val())+"&year="+yearsSelect.find("option:selected").val()+"&trim="+encodeURI(trimsSelect.find("option:selected").val())+"&trimName="+encodeURI(trimsSelect.find("option:selected").text())+"&modelName="+encodeURI(modelsSelect.find("option:selected").text());
    //console.log("/?make="+makesSelect.find("option:selected").val()+"&model="+modelsSelect.find("option:selected").val()+"&year="+yearsSelect.find("option:selected").val()+"&trim="+makesSelect.find("option:selected").val());
 
 });
 
-//if GET search param exists
+//if GET "search" param exists
+if(currentPageIsSearch) {
+
+    //show block with data
+    $(".data-block").removeClass("invisible");
+
+    var currentMake = getQueryParam("make");
+    makesSelect.val(currentMake).trigger("change.select2");
+
+
+    var currentYear = getQueryParam("year");
+    var currentModelCode = decodeURI(getQueryParam("model"));
+    var currentModelName = decodeURI(getQueryParam("modelName"));
+    var currentTrimCode = decodeURI(getQueryParam("trim"));
+    var currentTrimName = decodeURI(getQueryParam("trimName"));
+
+    // Create a DOM Option and pre-select by default
+
+    //makesSelect.val(currentMake).trigger("change");
+    var newOption = new Option(currentYear, currentYear, true, true);
+    yearsSelect.append(newOption).val(currentYear);
+    var newOption = new Option(currentModelName, currentModelCode, true, true);
+    modelsSelect.append(newOption).val(currentModelCode);
+    var newOption = new Option(currentTrimName, currentTrimCode, true, true);
+    trimsSelect.append(newOption).val(currentTrimCode);
+
+
+}
+
+

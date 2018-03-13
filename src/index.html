@@ -58,22 +58,24 @@
                     <div class="form-group col-md-3 col-sm-3">
                         <label for="selectMake">Make</label>
                         <select id="selectMake" name="make" class="form-control js-select2 js-select2-makes">
-                            <option value="">Make</option>
+                            <option></option>
+                            <option></option>
 
                         </select>
 
                     </div>
                     <div class="form-group col-md-1 col-sm-3">
                         <label for="selectYear">Year</label>
-                        <select id="selectYear" class="form-control js-select2 js-select2-years" disabled>
-                            <option value="">Year</option>
+                        <select id="selectYear" class="form-control js-select2 js-select2-years" disabled data-placeholder="Select YEAR">
+                            <option>Year</option>
+
 
                         </select>
                     </div>
                     <div class="form-group col-md-2 col-sm-3">
                         <label for="selectModel">Model</label>
                         <select id="selectModel" class="form-control js-select2 js-select2-models" disabled>
-                            <option value="">Model</option>
+                            <option>Model</option>
 
                         </select>
                     </div>
@@ -81,7 +83,7 @@
                     <div class="form-group col-md-2 col-sm-3">
                         <label for="selectTrim">Trim</label>
                         <select id="selectTrim" class="form-control js-select2 js-select2-trims" disabled>
-                            <option value="">Trims</option>
+                            <option>Trim</option>
 
                         </select>
                     </div>
@@ -91,22 +93,9 @@
 
 
             <div class="data-block invisible" >
-                <h4 class="mt-2 mb-3 text-center ">Your vehicle: 2017 Chevrolet Cruze <span class="badge badge-secondary">Hatchback I 1.7 TD (81kW)</span></h4>
+                <h4 class="mt-5 mb-4 text-center ">Your vehicle: 2017 Chevrolet Cruze <span class="badge badge-secondary">Hatchback I 1.7 TD (81kW)</span></h4>
 
                 <div class="row">
-                    <div class="col-md-6">
-                        <ul>
-                            <li>Generation: II [2016 .. 2019] [USDM]</li>
-                            <li>Market: USDM</li>
-                            <li>Power: 153 hp | 114.1 kW | 155 PS</li>
-                            <li>Engine: I4, Petrol</li>
-                            <li>Center Bore: 56.6 mm</li>
-                            <li>Wheel Fasteners: Lug nuts</li>
-                            <li>Thread Size: M12 x 1.5</li>
-                            <li>Trim Production: [2016 .. 2017]</li>
-                            <li>PCD: 5x105 / 5x4.13</li>
-                        </ul>
-                    </div>
                     <div class="col-md-6">
                         <div class="" role="alert">
                             <h4 class="alert-heading">
@@ -154,21 +143,7 @@
                             <h4 class="alert-heading">
                                 Optional Size(s)
                             </h4>
-                            <a class="option-item" href="#">
-                                <span class="option-dia pull-left">
-                                    17"
-                                </span>
-                                <span class="option-divider pull-left"></span>
-                                <div class="option-wheel-params">
-                                    <div>
-                                        <span class="option-tire-data">260/50R16</span>
-                                        <span class="option-rim-data">10Jx16 ET39</span>
-                                    </div>
-                                </div>
-                                <span class="option-right-icon pull-right">
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </span>
-                            </a>
+
                             <a class="option-item" href="#">
                                 <span class="option-dia pull-left">
                                     18"
@@ -228,6 +203,23 @@
                             </a>
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <h4 class="alert-heading">
+                            Additional data
+                        </h4>
+                        <ul>
+                            <li>Generation: II [2016 .. 2019] [USDM]</li>
+                            <li>Market: USDM</li>
+                            <li>Power: 153 hp | 114.1 kW | 155 PS</li>
+                            <li>Engine: I4, Petrol</li>
+                            <li>Center Bore: 56.6 mm</li>
+                            <li>Wheel Fasteners: Lug nuts</li>
+                            <li>Thread Size: M12 x 1.5</li>
+                            <li>Trim Production: [2016 .. 2017]</li>
+                            <li>PCD: 5x105 / 5x4.13</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
 
@@ -241,6 +233,7 @@
 <script src="3rd-party/js/popper.min.js"></script>
 <script src="3rd-party/js/bootstrap.min.js"></script>
 <script src="3rd-party/js/select2.min.js"></script>
+<script src="js/functions.js"></script>
 <script src="js/custom.js"></script>
 </body>
 </html>
