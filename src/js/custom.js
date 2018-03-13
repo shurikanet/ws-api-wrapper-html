@@ -41,7 +41,8 @@ $.ajax({
     makesSelect.select2({
         data: dataObj,
         placeholder: 'Make',
-        theme: 'bootstrap4'
+        theme: 'bootstrap4',
+        allowClear: true
     });
 
     if(currentPageIsSearch) {
@@ -82,11 +83,7 @@ makesSelect.on('change', function (e) {
             });
             yearsSelect.prepend('<option selected>Year</option>').select2({
                 data: dataObj,
-                placeholder: {
-                    id: "0",
-                    text: "Select an Title" //Should be text not placeholder
-                }
-                ,
+                placeholder: 'Years',
                 allowClear: true,
                 theme: 'bootstrap4'
             });
@@ -101,6 +98,7 @@ yearsSelect.on('change', function (e) {
 
     //var optionSelected = $(this).find("option:selected").text();
     var yearSelected = this.value;
+
 
     modelsSelect.html("").prop("disabled", true);
     trimsSelect.html("").prop("disabled", true);
@@ -131,7 +129,8 @@ yearsSelect.on('change', function (e) {
             modelsSelect.prepend('<option selected>Models</option>').select2({
                 data: dataObj,
                 placeholder: 'Models',
-                theme: 'bootstrap4'
+                theme: 'bootstrap4',
+                allowClear: true
             });
         });
     }
@@ -140,11 +139,12 @@ yearsSelect.on('change', function (e) {
 
 modelsSelect.on('change', function (e) {
 
-    var modelsSelect = this.value;
+    //var modelsSelect = this.value;
+    var modelSelected = modelsSelect.find("option:selected").val();
 
     trimsSelect.html("").prop("disabled", true);
     //if trim is chosen
-    if (modelsSelect){
+    if (modelSelected){
 
         trimsSelect.prop("disabled", false);
 
@@ -155,7 +155,7 @@ modelsSelect.on('change', function (e) {
             dataType: "json",
             data: {
                 make: makesSelect.find("option:selected").val(),
-                model: modelsSelect,
+                model: modelSelected,
                 year: yearsSelect.find("option:selected").val()
             }
 
@@ -170,7 +170,8 @@ modelsSelect.on('change', function (e) {
             trimsSelect.prepend('<option selected>Trims</option>').select2({
                 data: dataObj,
                 placeholder: 'Trims',
-                theme: 'bootstrap4'
+                theme: 'bootstrap4',
+                allowClear: true
             });
 
 
@@ -212,6 +213,7 @@ if(currentPageIsSearch) {
     yearsSelect.append(newOption).val(currentYear);
     var newOption = new Option(currentModelName, currentModelCode, true, true);
     modelsSelect.append(newOption).val(currentModelCode);
+    //   .trigger("change");
     var newOption = new Option(currentTrimName, currentTrimCode, true, true);
     trimsSelect.append(newOption).val(currentTrimCode);
 
