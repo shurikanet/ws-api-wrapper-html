@@ -1,15 +1,12 @@
-/*
-$('.js-select2-makes').select2({
-    //placeholder: 'Select an option'
-    //minimumResultsForSearch: 20,
-    //maximumInputLength: 20,
-    ajax: {
-        url: '/api/ws-makes.http',
-        dataType: 'json'
-    }
-});
-*/
 
+
+$( document ).ajaxStart(function() {
+    $(".loader").fadeIn();
+});
+
+$( document ).ajaxComplete(function() {
+    $(".loader").fadeOut();
+});
 
 var currentPageIsSearch = checkParameterExists("search") ? true : false;
 console.log(currentPageIsSearch);
@@ -58,11 +55,11 @@ $.ajax({
 
 makesSelect.on('change', function (e) {
     var makeSelected = this.value;
-    console.log(makeSelected);
+
     yearsSelect.html("").prop("disabled", true);
     modelsSelect.html("").prop("disabled", true);
     trimsSelect.html("").prop("disabled", true);
-
+    $(".data-block").addClass("invisible");
     //if make is chosen
     if (makeSelected){
         yearsSelect.prop("disabled", false);
@@ -102,7 +99,7 @@ yearsSelect.on('change', function (e) {
 
     modelsSelect.html("").prop("disabled", true);
     trimsSelect.html("").prop("disabled", true);
-
+    $(".data-block").addClass("invisible");
     //if year is chosen
     if (yearSelected){
 
@@ -141,7 +138,7 @@ modelsSelect.on('change', function (e) {
 
     //var modelsSelect = this.value;
     var modelSelected = modelsSelect.find("option:selected").val();
-
+    $(".data-block").addClass("invisible");
     trimsSelect.html("").prop("disabled", true);
     //if trim is chosen
     if (modelSelected){
@@ -181,14 +178,86 @@ modelsSelect.on('change', function (e) {
 });
 
 trimsSelect.on('change', function (e) {
-    //show block with data
-    $(".data-block").removeClass("invisible");
 
-    //or create a query with GET param
-   window.location.href = "?search=Y&make="+makesSelect.find("option:selected").val()+"&model="+encodeURI(modelsSelect.find("option:selected").val())+"&year="+yearsSelect.find("option:selected").val()+"&trim="+encodeURI(trimsSelect.find("option:selected").val())+"&trimName="+encodeURI(trimsSelect.find("option:selected").text())+"&modelName="+encodeURI(modelsSelect.find("option:selected").text());
-   //console.log("/?make="+makesSelect.find("option:selected").val()+"&model="+modelsSelect.find("option:selected").val()+"&year="+yearsSelect.find("option:selected").val()+"&trim="+makesSelect.find("option:selected").val());
 
+    //if we use another page
+    //window.location.href = "?search=Y&make="+makesSelect.find("option:selected").val()+"&model="+encodeURI(modelsSelect.find("option:selected").val())+"&year="+yearsSelect.find("option:selected").val()+"&trim="+encodeURI(trimsSelect.find("option:selected").val())+"&trimName="+encodeURI(trimsSelect.find("option:selected").text())+"&modelName="+encodeURI(modelsSelect.find("option:selected").text());
+
+
+    //var modelsSelect = this.value;
+    var trimSelected = trimsSelect.find("option:selected").val();
+
+    //trimsSelect.html("").prop("disabled", true);
+
+    //if trim is chosen
+    if (trimSelected){
+
+        trimsSelect.prop("disabled", false);
+
+        $.ajax({
+            type: 'GET',
+            //url: '/api/ws-data.http',
+            url: 'https://api.wheel-size.com/v1/search/by_model/?user_key='+apiKey,
+            dataType: "json",
+            data: {
+                make: makesSelect.find("option:selected").val(),
+                model: modelsSelect.find("option:selected").val(),
+                year: yearsSelect.find("option:selected").val(),
+                trim: trimSelected
+            }
+
+        }).then(function (data) {
+
+            var array = $.map(data, function(value, index) {
+                return [value];
+            });
+
+            // we consider that only one element is in array
+            // temp solution
+
+
+            jPut.trims.data = array;
+
+            var wheelsAr = array[0].wheels;
+
+            //array of OEM Wheel Pairs
+            var oemWheels = wheelsAr.filter(function (el) {
+                return (el.is_stock === true);
+            });
+
+            //array of nonOEM Wheel Pairs
+            var nonOemWheels = wheelsAr.filter(function (el) {
+                return (el.is_stock === false);
+            });
+
+
+            jPut.oemWheels.data = oemWheels;
+            if (oemWheels.length > 0)
+                $("#oemInsert").removeClass("invisible");
+
+
+            jPut.nonOemWheels.data = nonOemWheels;
+            if (nonOemWheels.length > 0)
+                $("#nonOemInsert").removeClass("invisible");
+
+            //header should be pre-filled:
+            $("span[data-car-trim]").html(trimSelected);
+            $("span[data-car-name]").html(yearsSelect.find("option:selected").text() + ' '+makesSelect.find("option:selected").text()+ ' '+ modelsSelect.find("option:selected").text());
+
+            // show data what we get finally
+            $(".data-block").removeClass("invisible");
+
+        });
+    }
 });
+
+
+
+
+
+
+
+
 
 //if GET "search" param exists
 if(currentPageIsSearch) {
@@ -216,6 +285,8 @@ if(currentPageIsSearch) {
     //   .trigger("change");
     var newOption = new Option(currentTrimName, currentTrimCode, true, true);
     trimsSelect.append(newOption).val(currentTrimCode);
+
+
 
 
 }

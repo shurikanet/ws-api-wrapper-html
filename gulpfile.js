@@ -26,7 +26,8 @@ gulp.task('js', () => {
     return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/popper.js/dist/umd/popper.min.js',
-        'node_modules/select2/dist/js/select2.min.js'
+        'node_modules/select2/dist/js/select2.min.js',
+        'node_modules/jput/js/jput.min.js'
     ])
      .pipe(gulp.dest("src/3rd-party/js"))
      .pipe(browserSync.stream())

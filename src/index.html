@@ -91,8 +91,9 @@
 
 
 
-            <div class="data-block invisible" >
-                <h4 class="mt-5 mb-4 text-center ">Your vehicle: 2017 Chevrolet Cruze <span class="badge badge-secondary">Hatchback I 1.7 TD (81kW)</span></h4>
+
+            <div class="data-block invisible">
+                <h4 class="mt-5 mb-4 text-center ">Your vehicle: <span data-car-name="">2017 Chevrolet Cruze</span> <span class="badge badge-secondary" data-car-trim>Hatchback I 1.7 TD (81kW)</span></h4>
 
                 <div class="row">
                     <div class="col-md-6">
@@ -100,42 +101,31 @@
                             <h4 class="alert-heading">
                                 Original Equipment Size(s)
                             </h4>
-                            <a class="option-item" href="#">
-                                <span class="option-dia pull-left">
-                                    16"
-                                </span>
-                                <span class="option-divider pull-left"></span>
-                                <div class="option-wheel-params">
-                                    <div>
-                                        <span class="option-tire-data">260/50R16</span>
-                                        <span class="option-rim-data">10Jx16 ET39</span>
-                                    </div>
+                            <div id="oemInsert" class="invisible">
+                                <div class="oemDataWheels" jput="oemWheels">
+                                    <a class="option-item" href="#"  >
+                                        <span class="option-dia pull-left">
+                                            {{json.front.rim_diameter}}"
+                                        </span>
+                                        <span class="option-divider pull-left"></span>
+                                        <div class="option-wheel-params">
+                                            <div>
+                                                <span class="option-tire-data">{{json.front.tire}}</span>
+                                                <span class="option-rim-data">{{json.front.rim}}</span>
+                                                <span class="option-axis {{json.rear.tire == ''?'invisible':''}}">front</span>
+                                            </div>
+                                            <div class="{{json.rear.tire == ''?'invisible':''}}">
+                                                <span class="option-tire-data">{{json.rear.tire}}</span>
+                                                <span class="option-rim-data">{{json.rear.rim}}</span>
+                                                <span class="option-axis">rear</span>
+                                            </div>
+                                        </div>
+                                        <span class="option-right-icon pull-right">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </span>
+                                    </a>
                                 </div>
-                                <span class="option-right-icon pull-right">
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </span>
-                            </a>
-                            <a class="option-item" href="#">
-                                <span class="option-dia pull-left">
-                                    17"
-                                </span>
-                                <span class="option-divider pull-left"></span>
-                                <div class="option-wheel-params">
-                                    <div>
-                                        <span class="option-tire-data">250/50R17</span>
-                                        <span class="option-rim-data">9Jx17 ET40</span>
-                                        <span class="option-axis">front</span>
-                                    </div>
-                                    <div>
-                                        <span class="option-tire-data">260/50R17</span>
-                                        <span class="option-rim-data">10Jx17 ET39</span>
-                                        <span class="option-axis">rear</span>
-                                    </div>
-                                </div>
-                                <span class="option-right-icon pull-right">
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </span>
-                            </a>
+                            </div>
 
                             <hr>
 
@@ -143,27 +133,32 @@
                                 Optional Size(s)
                             </h4>
 
-                            <a class="option-item" href="#">
-                                <span class="option-dia pull-left">
-                                    18"
-                                </span>
-                                <span class="option-divider pull-left"></span>
-                                <div class="option-wheel-params">
-                                    <div>
-                                        <span class="option-tire-data">240/50R18</span>
-                                        <span class="option-rim-data">12Jx18 ET40</span>
-                                        <span class="option-axis">front</span>
-                                    </div>
-                                    <div>
-                                        <span class="option-tire-data">260/50R17</span>
-                                        <span class="option-rim-data">10Jx17 ET39</span>
-                                        <span class="option-axis">rear</span>
-                                    </div>
+                            <div id="nonOemInsert" class="invisible">
+                                <div class="nonOemDataWheels" jput="nonOemWheels">
+                                    <a class="option-item" href="#"  >
+                <span class="option-dia pull-left">
+                    {{json.front.rim_diameter}}"
+                </span>
+                                        <span class="option-divider pull-left"></span>
+                                        <div class="option-wheel-params">
+                                            <div>
+                                                <span class="option-tire-data">{{json.front.tire}}</span>
+                                                <span class="option-rim-data">{{json.front.rim}}</span>
+                                                <span class="option-axis {{json.rear.tire == ''?'invisible':''}}">front</span>
+                                            </div>
+                                            <div class="{{json.rear.tire == ''?'invisible':''}}">
+                                                <span class="option-tire-data">{{json.rear.tire}}</span>
+                                                <span class="option-rim-data">{{json.rear.rim}}</span>
+                                                <span class="option-axis">rear</span>
+                                            </div>
+                                        </div>
+                                        <span class="option-right-icon pull-right">
+                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                </span>
+                                    </a>
                                 </div>
-                                <span class="option-right-icon pull-right">
-                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                                </span>
-                            </a>
+                            </div>
+                            <!--
                             <a class="option-item" href="#">
                                 <span class="option-dia pull-left">
                                     18"
@@ -200,23 +195,27 @@
                                     <i class="fa fa-chevron-right" aria-hidden="true"></i>
                                 </span>
                             </a>
+                            -->
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" jput="trims">
                         <h4 class="alert-heading">
                             Additional data
                         </h4>
                         <ul>
-                            <li>Generation: II [2016 .. 2019] [USDM]</li>
-                            <li>Market: USDM</li>
-                            <li>Power: 153 hp | 114.1 kW | 155 PS</li>
-                            <li>Engine: I4, Petrol</li>
-                            <li>Center Bore: 56.6 mm</li>
-                            <li>Wheel Fasteners: Lug nuts</li>
-                            <li>Thread Size: M12 x 1.5</li>
-                            <li>Trim Production: [2016 .. 2017]</li>
-                            <li>PCD: 5x105 / 5x4.13</li>
+                            <li>Generation: {{json.generation.bodies[0].title}}</li>
+                            <li>Market: {{json.market.abbr}}</li>
+                            <li>Power: {{json.power.hp}} hp | {{json.power.kW}} kW | {{json.power.PS}} PS</li>
+                            <li>Engine: {{json.fuel}}</li>
+                            <li>Center Bore: {{json.centre_bore}} mm</li>
+                            <li>Wheel Fasteners: {{json.lock_type=='nut'?"Lug nuts":"Bolts"}}</li>
+                            <li>Thread Size: {{json.lock_text}}</li>
+                            <li>PCD: {{json.pcd}}</li>
+
                         </ul>
+                        <div><img class="img-fluid img-thumbnail" style="max-width: 350px;" jsrc="{{json.generation.bodies[0].image}}" alt=""></div>
+
+
                     </div>
 
                 </div>
@@ -228,11 +227,16 @@
     </div>
 </div>
 
+<div id="wait" class="loader" style="display:none; position:absolute; top:45%; left:45%;"><br>Loading..</div>
+
 <script src="3rd-party/js/jquery.min.js"></script>
 <script src="3rd-party/js/popper.min.js"></script>
 <script src="3rd-party/js/bootstrap.min.js"></script>
 <script src="3rd-party/js/select2.min.js"></script>
+<script src="js/jput-2.js"></script>
+<!--<script src="3rd-party/js/jput.min.js"></script>-->
 <script src="js/functions.js"></script>
 <script src="js/custom.js"></script>
+
 </body>
 </html>
