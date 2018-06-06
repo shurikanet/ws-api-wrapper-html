@@ -40,6 +40,7 @@ $.ajax({
         placeholder: 'Make',
         theme: 'bootstrap4',
         allowClear: true
+
     });
 
     if(currentPageIsSearch) {
@@ -59,6 +60,7 @@ makesSelect.on('change', function (e) {
     yearsSelect.html("").prop("disabled", true);
     modelsSelect.html("").prop("disabled", true);
     trimsSelect.html("").prop("disabled", true);
+
     $(".data-block").addClass("invisible");
     //if make is chosen
     if (makeSelected){
@@ -82,8 +84,10 @@ makesSelect.on('change', function (e) {
                 data: dataObj,
                 placeholder: 'Years',
                 allowClear: true,
-                theme: 'bootstrap4'
+                theme: 'bootstrap4',
+                selectOnClose: true
             });
+            yearsSelect.select2("open");
         });
     }
 
@@ -129,6 +133,7 @@ yearsSelect.on('change', function (e) {
                 theme: 'bootstrap4',
                 allowClear: true
             });
+            modelsSelect.select2("open");
         });
     }
 
@@ -170,8 +175,7 @@ modelsSelect.on('change', function (e) {
                 theme: 'bootstrap4',
                 allowClear: true
             });
-
-
+            trimsSelect.select2("open");
         });
     }
 
@@ -246,7 +250,6 @@ trimsSelect.on('change', function (e) {
 
             // show data what we get finally
             $(".data-block").removeClass("invisible");
-
         });
     }
 });
