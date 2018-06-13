@@ -27,4 +27,18 @@ function checkParameterExists(parameter)
 function getQueryParam(name) {
     return (location.search.split(name + '=')[1] || '').split('&')[0];
 }
+function formatState (state) {
+    console.log(state);
+    if (!state.id) {
+        return state.text;
+    }
 
+    var $state = $(
+        '<span>' + state.text + '</span> '
+    );
+    if (state.generation)
+        $state = $( '<span style="position:relative; display:block;"><span>' + state.text + '</span> '
+        + '<span style="position: absolute; top: -13px; color: #777;  font-size:12px;white-space: nowrap;right: 10px;">Gen: ' + state.generation + '</span></span>'
+    );
+    return $state;
+};

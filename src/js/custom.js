@@ -39,8 +39,8 @@ $.ajax({
         data: dataObj,
         placeholder: 'Make',
         theme: 'bootstrap4',
-        allowClear: true
-
+        allowClear: true,
+        selectOnClose: true
     });
 
     if(currentPageIsSearch) {
@@ -165,7 +165,8 @@ modelsSelect.on('change', function (e) {
             var dataObj = jQuery.parseJSON(JSON.stringify(data));
             var data = $.map(dataObj, function (obj) {
                 obj.id = obj.id || obj.slug;
-                obj.text = obj.text || obj.name+' / '+obj.generation;
+                obj.text = obj.text || obj.name;
+                //obj.text = obj.text || obj.name+' / '+obj.generation;
                 return obj;
             });
 
@@ -173,7 +174,8 @@ modelsSelect.on('change', function (e) {
                 data: dataObj,
                 placeholder: 'Trims',
                 theme: 'bootstrap4',
-                allowClear: true
+                allowClear: true,
+                templateResult: formatState
             });
             trimsSelect.select2("open");
         });
@@ -188,8 +190,8 @@ trimsSelect.on('change', function (e) {
     //window.location.href = "?search=Y&make="+makesSelect.find("option:selected").val()+"&model="+encodeURI(modelsSelect.find("option:selected").val())+"&year="+yearsSelect.find("option:selected").val()+"&trim="+encodeURI(trimsSelect.find("option:selected").val())+"&trimName="+encodeURI(trimsSelect.find("option:selected").text())+"&modelName="+encodeURI(modelsSelect.find("option:selected").text());
 
 
-    //var modelsSelect = this.value;
     var trimSelected = trimsSelect.find("option:selected").val();
+
 
     //trimsSelect.html("").prop("disabled", true);
 
@@ -205,44 +207,59 @@ trimsSelect.on('change', function (e) {
             dataType: "json",
             data: {
                 make: makesSelect.find("option:selected").val(),
+                //make: "mitsubishi",
                 model: modelsSelect.find("option:selected").val(),
+                //model: "outlander",
                 year: yearsSelect.find("option:selected").val(),
+                //year: "2015",
                 trim: trimSelected
+                //trim: "2.0i"
             }
 
         }).then(function (data) {
 
-            var array = $.map(data, function(value, index) {
+            //alert();
+
+            // we consider that the only one element is in array
+            // but let`s think about situation when we have 2+ for any case
+
+            var wheelsArray = $.map(data, function(value, index) {
                 return [value];
             });
 
-            // we consider that only one element is in array
-            // temp solution
+            jPut.trims.data = wheelsArray;
+
+            var i;
+            for (i = 0; i < wheelsArray.length; i++) {
+
+                var wheelsAr = wheelsArray[i].wheels;
+
+                //array of OEM Wheel Pairs
+                var oemWheels = wheelsAr.filter(function (el) {
+                    return (el.is_stock === true);
+                });
+
+                //array of nonOEM Wheel Pairs
+                var nonOemWheels = wheelsAr.filter(function (el) {
+                    return (el.is_stock === false);
+                });
 
 
-            jPut.trims.data = array;
-
-            var wheelsAr = array[0].wheels;
-
-            //array of OEM Wheel Pairs
-            var oemWheels = wheelsAr.filter(function (el) {
-                return (el.is_stock === true);
-            });
-
-            //array of nonOEM Wheel Pairs
-            var nonOemWheels = wheelsAr.filter(function (el) {
-                return (el.is_stock === false);
-            });
+                jPut.oemWheels.data = oemWheels;
+                if (oemWheels.length > 0) {
+                    $("#oemInsert-" + i).removeClass("invisible");
+                    $("#oemInsert-" + i).append($(".oemDataWheels").html());
+                }
 
 
-            jPut.oemWheels.data = oemWheels;
-            if (oemWheels.length > 0)
-                $("#oemInsert").removeClass("invisible");
+                jPut.nonOemWheels.data = nonOemWheels;
+                if (nonOemWheels.length > 0) {
+                    $("#nonOemInsert-" + i).removeClass("invisible");
+                    $("#nonOemInsert-" + i).append($(".nonOemDataWheels").html());
+                 }
 
+            }
 
-            jPut.nonOemWheels.data = nonOemWheels;
-            if (nonOemWheels.length > 0)
-                $("#nonOemInsert").removeClass("invisible");
 
             //header should be pre-filled:
             $("span[data-car-trim]").html(trimSelected);
@@ -250,6 +267,9 @@ trimsSelect.on('change', function (e) {
 
             // show data what we get finally
             $(".data-block").removeClass("invisible");
+
+            //remove temp elements
+            $(".nonOemDataWheels, .oemDataWheels").html("");
         });
     }
 });
@@ -257,7 +277,7 @@ trimsSelect.on('change', function (e) {
 
 
 
-
+//trimsSelect.trigger("change");  - for testing
 
 
 
