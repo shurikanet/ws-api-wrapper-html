@@ -55,7 +55,7 @@
 
             <div class="text-left">
                 <div class="form-row">
-                    <div class="form-group col-md-3 col-sm-3">
+                    <div class="form-group col-md-2 col-sm-3">
                         <label for="selectMake">Make</label>
                         <select id="selectMake" name="make" class="form-control js-select2 js-select2-makes">
                             <option></option>
@@ -79,7 +79,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-2 col-sm-3">
+                    <div class="form-group col-md-3 col-sm-3">
                         <label for="selectTrim">Trim</label>
                         <select id="selectTrim" class="form-control js-select2 js-select2-trims" disabled>
                             <option>Trim</option>
@@ -168,7 +168,7 @@
                         </h4>
                         <ul>
                             <li>Generation: {{json.generation.bodies[0].title}}</li>
-                            <li>Market: {{json.market.abbr}}</li>
+                            <li>Market: {{json.market.abbr}}, {{json.market.name}}</li>
                             <li>Power: {{json.power.hp}} hp | {{json.power.kW}} kW | {{json.power.PS}} PS</li>
                             <li>Engine: {{json.fuel}}</li>
                             <li>Center Bore: {{json.centre_bore}} mm</li>

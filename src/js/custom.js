@@ -165,12 +165,13 @@ modelsSelect.on('change', function (e) {
             var dataObj = jQuery.parseJSON(JSON.stringify(data));
             var data = $.map(dataObj, function (obj) {
                 obj.id = obj.id || obj.slug;
-                obj.text = obj.text || obj.name;
+                obj.text = obj.text || obj.trim;
+                obj.text = obj.text + ' ('+ obj.markets[0].abbr +')';
                 //obj.text = obj.text || obj.name+' / '+obj.generation;
                 return obj;
             });
 
-            trimsSelect.prepend('<option selected>Trims</option>').select2({
+            trimsSelect.prepend('<option selected>Choose Trims</option>').select2({
                 data: dataObj,
                 placeholder: 'Trims',
                 theme: 'bootstrap4',

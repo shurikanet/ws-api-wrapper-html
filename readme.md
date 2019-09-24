@@ -2,7 +2,7 @@
 
 That is how it looks like:
 ```
->> npm install gulp
+>> npm install gulp@3.9.1
  
 >> gulp
 

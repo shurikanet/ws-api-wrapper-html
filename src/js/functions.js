@@ -33,12 +33,22 @@ function formatState (state) {
         return state.text;
     }
 
+    var trimTextValue = state.text;
+    if (state.trim)
+        trimTextValue = state.trim;
+    // for JDM market we often have body field filled out
+    if (state.body)
+        trimTextValue = trimTextValue + ' (' + state.body + ')';
+
     var $state = $(
-        '<span>' + state.text + '</span> '
+        '<span>' + trimTextValue + '</span> '
     );
+
     if (state.generation)
-        $state = $( '<span style="position:relative; display:block;"><span>' + state.text + '</span> '
-        + '<span style="position: absolute; top: -13px; color: #777;  font-size:12px;white-space: nowrap;right: 10px;">Gen: ' + state.generation + '</span></span>'
+        $state = $( '<div class="option--trim-name"><span class="option--trim-name-value">' + trimTextValue + '</span> '
+        + '<span class="option--trim-generation">' + state.generation + ' ['+ state.production_start_year +' .. '+ state.production_end_year +']</span>'
+        +'<span class="option--trim-market">' + state.markets[0].abbr +'</span>' +
+            '</div>'
     );
     return $state;
 };
