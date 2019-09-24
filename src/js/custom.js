@@ -263,7 +263,7 @@ trimsSelect.on('change', function (e) {
 
 
             //header should be pre-filled:
-            $("span[data-car-trim]").html(trimSelected);
+            $("span[data-car-trim]").html(trimsSelect.find("option:selected").text());
             $("span[data-car-name]").html(yearsSelect.find("option:selected").text() + ' '+makesSelect.find("option:selected").text()+ ' '+ modelsSelect.find("option:selected").text());
 
             // show data what we get finally
