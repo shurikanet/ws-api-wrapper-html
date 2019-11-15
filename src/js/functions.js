@@ -44,11 +44,15 @@ function formatState (state) {
         '<span>' + trimTextValue + '</span> '
     );
 
-    if (state.generation)
-        $state = $( '<div class="option--trim-name"><span class="option--trim-name-value">' + trimTextValue + '</span> '
-        + '<span class="option--trim-generation">' + state.generation + ' ['+ state.production_start_year +' .. '+ state.production_end_year +']</span>'
-        +'<span class="option--trim-market">' + state.markets[0].abbr +'</span>' +
+    if (state.generation) {
+        $state = $('<div class="option--trim-name"><span class="option--trim-name-value">' + trimTextValue + '</span> '
+            + '<span class="option--trim-generation">' + state.generation + ' [' + state.production_start_year + ' .. ' + state.production_end_year + ']</span>'
+            + ' <span class="option--trim-market">' + state.markets[0].abbr + '</span>' +
             '</div>'
-    );
+        );
+        if (state.options[0])
+            $state.append($('<div class="option--trim-options">Options: ' + state.options.join(", ") + ' </div>'));
+
+    }
     return $state;
 };
