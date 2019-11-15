@@ -80,37 +80,32 @@ body {
   position: absolute;
   top: -13px;
   color: #666;
-  font-size:15px;
+  font-size: 15px;
   white-space: nowrap;
-  right: 10px;
-}
+  right: 10px; }
 
 .select2-results__option--highlighted .option--trim-generation,
-.select2-results__option--highlighted .option--trim-market{
-  color: #fff;
-}
+.select2-results__option--highlighted .option--trim-market {
+  color: #fff; }
 
-.option--trim-name{
-  position:relative;
-  display:block;
-}
-.option--trim-market{
+.option--trim-name {
+  position: relative;
+  display: block; }
+
+.option--trim-market {
   position: absolute;
   top: -13px;
   color: #666;
-  font-size:15px;
-  left:0;
-}
+  font-size: 15px;
+  left: 0; }
 
 #select2-selectTrim-results .select2-results__option {
-  padding: 1rem 0.375rem;
+  padding: 1rem 0.375rem; }
 
-}
 .option--trim-name-value {
   position: relative;
   top: 9px;
-  font-size: 19px;
-}
-#select2-selectTrim-results li:first-child{
-  display: none;
-}
+  font-size: 19px; }
+
+#select2-selectTrim-results li:first-child {
+  display: none; }
